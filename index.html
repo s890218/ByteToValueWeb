@@ -24,6 +24,30 @@
       </div>
     </div>
     <script>
+	// 監聽所有鍵盤事件
+    document.addEventListener("keydown", (event) => {
+        const focusedElement = document.activeElement;
+
+        // 針對有焦點的輸入框進行複製或貼上操作
+        if (focusedElement.tagName === "INPUT" || focusedElement.tagName === "TEXTAREA") {
+            // 複製操作
+            if ((event.ctrlKey || event.metaKey) && event.key === "c") {
+                const selection = window.getSelection().toString();
+                navigator.clipboard.writeText(selection).then(() => {
+                    console.log("Copied: ", selection);
+                });
+            }
+
+            // 貼上操作
+            if ((event.ctrlKey || event.metaKey) && event.key === "v") {
+                navigator.clipboard.readText().then((text) => {
+                    console.log("Pasted: ", text);
+                    focusedElement.value += text; // 將貼上的文字插入輸入框
+                });
+                event.preventDefault(); // 防止默認行為
+            }
+        }
+    });
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
