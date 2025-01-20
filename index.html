@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=720 height=1280></canvas>
+      <canvas id="unity-canvas" width=540 height=960></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -93,8 +93,8 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "720px";
-        canvas.style.height = "1280px";
+        canvas.style.width = "540px";
+        canvas.style.height = "960px";
       }
 
       loadingBar.style.display = "block";
@@ -107,35 +107,13 @@
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
+            document.makeFullscreen('unity-container');
           };
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
-	  // Unity 調用的 JavaScript 函數
-function showInputField(x, y, width, height, text) {
-  var inputElement = document.createElement("input");
-  inputElement.type = "text";
-  inputElement.value = text;
-  inputElement.style.position = "absolute";
-  inputElement.style.left = x + "px";
-  inputElement.style.top = y + "px";
-  inputElement.style.width = width + "px";
-  inputElement.style.height = height + "px";
-  document.body.appendChild(inputElement);
-  
-  // 可以在此進行自定義處理
-  inputElement.focus();
-}
-
-function hideInputField() {
-  var inputElement = document.querySelector("input[type='text']");
-  if (inputElement) {
-    inputElement.style.display = "none"; // 隱藏輸入框
-  }
-}
     </script>
   </body>
 </html>
